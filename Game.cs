@@ -6,10 +6,20 @@ using System.Threading.Tasks;
 
 namespace lab_03
 {
+    /// <summary>
+    /// This game randomly selects a word from the pre-defined database and the player 
+    /// try to guess the word by entering letters.
+    /// </summary>
     public class Game
     {
+        /// <summary>
+        /// This function continues the game until the player correctly guess the game or exceeds
+        /// the maximum allowed incorrect guesses. This function display the current state of the word,
+        /// the guessed letter and the count of incorrect guesses.
+        /// </summary>
         public void GuessingGame()
         {
+            // words database 
             string[] wordDatabase = { "giraffe", "tiger", "lion", "bear", "zebra", "elephant","wolf","panther"};
             int totalIncorrectGuess = 5;
             bool gameContinue = true;
@@ -18,6 +28,7 @@ namespace lab_03
 
             while (gameContinue)
             {
+                // choosing a random word from the word data base
                 string choosenWord = wordDatabase[new Random().Next(wordDatabase.Length)];
                 string displayWord = new string('_', choosenWord.Length);
                 int incorrectGuess = 0;
@@ -31,7 +42,6 @@ namespace lab_03
                     char guessedLetter = GetUserInput();
 
                     guessedWords += guessedLetter + " ";
-
 
                     // Check if the guessed letter is in the word
                     if (choosenWord.Contains(guessedLetter))
@@ -78,11 +88,15 @@ namespace lab_03
                     gameContinue = false; // stop the game
                 }
 
-                // Reset the game for a new round
                 gameContinue = false;
             }
         }
 
+        /// <summary>
+        /// This function takes the input from the user and check its validity. And if the input is wrong,
+        /// it displays an error message
+        /// </summary>
+        /// <returns></returns>
         public char GetUserInput()
         {
             char guessedLetter = ' ';
